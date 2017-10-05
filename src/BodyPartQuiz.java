@@ -15,9 +15,9 @@ public class BodyPartQuiz {
 	// Get 3 celebrity photos from the internet, save them to your computer, and fill
 	// in their paths here. To get the path, right click on the image, and copy its Location.
 	String firstImage = "download.jpg";
-	String secondImage = "";
-	String thirdImage = "";
-
+	String secondImage = "download2.jpg";
+	String thirdImage = "download3.jpg";
+JLabel currentlabel = new JLabel();
 	JFrame window = new JFrame();
 	
 	private void startQuiz() {
@@ -25,7 +25,7 @@ public class BodyPartQuiz {
 		// Set the size of the window so that you can only see part of the image.
 			
 		//window.setSize(300, 300);
-			
+			window.setSize(100, 100);
 		// Make an int variable to hold the score.
 int score=0;
 		// Ask the user who this person is and store their answer
@@ -50,8 +50,9 @@ showNextImage();
 	}
 
 	public void showNextImage() {
-		window.removeAll();
-		window.add(getNextImage());
+		window.remove(currentlabel);
+		currentlabel = getNextImage();
+		window.add(currentlabel);
 		window.pack();
 		window.repaint();
 	}
