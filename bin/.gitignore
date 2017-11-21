@@ -3,6 +3,7 @@
 /BodyPartQuiz.class
 /Cat.class
 /CowTimer.class
+/Cup.class
 /Drum.jpg
 /Drum.wav
 /Drum2.png
@@ -15,6 +16,8 @@
 /HarryPotter.class
 /Houses.class
 /Jeopardy.class
+/Kettle$Water.class
+/Kettle.class
 /Minion.class
 /MinionTest.class
 /Movie.class
@@ -27,13 +30,10 @@
 /Runner.class
 /Runner2.class
 /SeaCreature.class
+/SimpleCalculator.class
 /Smurf.class
 /Supply.class
-/Tea$Cup.class
-/Tea$Kettle$Water.class
-/Tea$Kettle.class
-/Tea$TeaBag.class
-/Tea.class
+/TeaBag.class
 /TeaMaker.class
 /Textbook.class
 /download.jpg
@@ -41,8 +41,3 @@
 /download3.jpg
 /gridworld.jar
 /robot.jar
-/Cup.class
-/Kettle$Water.class
-/Kettle.class
-/TeaBag.class
-/SimpleCalculator.class
