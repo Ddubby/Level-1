@@ -1,6 +1,7 @@
+import java.util.Random;
 
 public class Vault {
-static int secretcode;
+int secretcode;
 
 
 boolean tryCode(int code) {
@@ -12,8 +13,10 @@ boolean tryCode(int code) {
 		return false;
 	}
 }
-public Vault(int secretcode) {
-this.secretcode=secretcode;	
+public Vault() {
+	Random a=new Random();
+	secretcode=a.nextInt(1000000000);
+	System.out.println(secretcode);
 }
 }
 

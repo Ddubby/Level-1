@@ -1,9 +1,16 @@
-import java.util.Random;
+
 
 public class JamesBond {
 int findCode(Vault vault){
-	Random a=new Random(1000000000);
-	Vault.tryCode();
+	for (int i = 0; i < 1000000000; i++) {
+	
+		if (vault.tryCode(i)) {
+		return i;
+	}
+	
+	}
+	return -1;
 }
+
 }
 
