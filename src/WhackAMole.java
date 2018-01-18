@@ -1,44 +1,98 @@
+import java.applet.AudioClip;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.Random;
+
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class WhackAMole {
+public class WhackAMole implements ActionListener{
 	private int a;
+	Random molegenerator=new Random();
 	JFrame frame=new JFrame();
 	JPanel panel=new JPanel();
-	JButton button1=new JButton();
-	JButton button2=new JButton();
-	JButton button3=new JButton();
-	JButton button4=new JButton();
-	JButton button5=new JButton();
-	JButton button6=new JButton();
-	JButton button7=new JButton();
-	JButton button8=new JButton();
-	JButton button9=new JButton();
-	JButton button10=new JButton();
-	JButton button11=new JButton();
-	JButton button12=new JButton();
+	JButton molebutton;
+	Date starttime;
+	int numberofmoles=0;
+	int misses=0;
 	
-	int drawButtons(int a) {
+	void intframe() {
+		starttime=new Date();
 		frame.setVisible(true);
-		frame.setSize(300, 150);
+		frame.setSize(300, 370);
 		frame.add(panel);
-		panel.add(button1);
-		panel.add(button2);
-		panel.add(button3);
-		panel.add(button4);
-		panel.add(button5);
-		panel.add(button6);
-		panel.add(button7);
-		panel.add(button8);
-		panel.add(button9);
-		panel.add(button10);
-		panel.add(button11);
-		panel.add(button12);
-		return 0;
+	}
+	
+	void drawButtons() {
+		int c=molegenerator.nextInt(24)+1;
+			for (int i =1 ; i < 25; i++) {
+			JButton button=new JButton();
+			panel.add(button);
+			button.addActionListener(this);
+			if (i==c) {
+				button.setText("mole!");
+				molebutton=button;
+			}
+		}
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	public static void main(String[] args) {
 		WhackAMole b=new WhackAMole();
-		b.drawButtons(0);
+		b.intframe();
+		b.drawButtons();
 	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Object buttonpressed=e.getSource();
+		if (!buttonpressed.equals(molebutton)) {
+			misses++;
+			switch (misses%3)
+			{
+			case 0:
+				speak("dork");
+			break; 
+			case 1:
+				speak("idiot");
+				break;
+			case 2:
+				speak("moron");
+				break;
+			}
+			
+			
+		}
+		else {
+			panel.removeAll();
+			drawButtons();
+			playSound("pong.wav");
+			numberofmoles++;
+			if (numberofmoles==10) {
+				endGame(starttime,numberofmoles);
+			}
+		}
+	}
+	void speak(String words) {
+		try {
+		Runtime.getRuntime().exec("say " + words).waitFor();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		}
+	private void playSound(String fileName) {
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource(fileName));
+		sound.play();
+	}
+	private void endGame(Date timeAtStart, int molesWhacked) {
+		Date timeAtEnd = new Date();
+		JOptionPane.showMessageDialog(null, "Your whack rate is "
+		+ ((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000.00 / molesWhacked) + " moles per second.");
+		System.exit(0);
+	}
+
 }
